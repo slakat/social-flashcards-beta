@@ -14,6 +14,9 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="auto-hide-splash-screen" value="false" />
+  <allow-navigation href="http://*/*" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
