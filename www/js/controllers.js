@@ -1,4 +1,4 @@
-angular.module('sociogram.controllers', [])
+angular.module('socialflashcards.controllers', [])
 
     .controller('AppCtrl', function ($scope, $state, OpenFB) {
 
@@ -59,24 +59,64 @@ angular.module('sociogram.controllers', [])
         });
     })
 
-    .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB) {
-        OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 5})
+    .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB, $ionicPlatform, FriendsService) {
+  /*      OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 5})
             .success(function (result) {
                 $scope.friends = result.data;
             })
             .error(function(data) {
                 alert(data.error.message);
-            });
+            });*/
+      // Initialize the database.
+      $ionicPlatform.ready(function() {
+
+        FriendsService.loadDB();
+
+         FriendsService.getRandomFriend().then(function(result)
+        {
+          $scope.friends = result;
+          console.log($scope.friends);
+        });
+
+      });
+
+
     })
 
-    .controller('AllFriendsCtrl', function ($scope, $stateParams, OpenFB) {
-        OpenFB.get('/' + $stateParams.personId + '/taggable_friends', {limit: 2000})
+    .controller('AllFriendsCtrl', function ($scope, $stateParams, OpenFB, $ionicPlatform, FriendsService, $q) {
+
+
+      // Initialize the database.
+      $ionicPlatform.ready(function() {
+
+          FriendsService.initDB();
+        //FriendsService.destroyDB();
+        // Get all birthday records from the database.
+        //FriendsService.getAllFriends().then(function(friends) {
+        //});
+      });
+
+      var promises = [];
+
+
+      OpenFB.get('/' + $stateParams.personId + '/taggable_friends?fields=id,name,picture.width(200).height(200)', {limit: 2000,})
             .success(function (result) {
                 $scope.friends = result.data;
+
+              for(var id in result.data) {
+                var friend = result.data[id];
+                promises.push(FriendsService.addFriend({
+                  "name": friend.name,
+                  "picture": friend.picture.data.url
+                }))
+              }
+
+              $q.all(promises);
             })
             .error(function(data) {
                 alert(data.error.message);
             });
+
     })
 
     .controller('MutualFriendsCtrl', function ($scope, $stateParams, OpenFB) {
@@ -125,4 +165,5 @@ angular.module('sociogram.controllers', [])
 
         loadFeed();
 
-    });
+    })
+

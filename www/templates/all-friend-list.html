@@ -9,6 +9,9 @@
         <ion-list>
             <ion-item ng-repeat="friend in friends">
                 {{friend.name}}
+              <div class="item friends-image">
+                <img ng-src="{{ friend.picture.data.url }}"  />
+              </div>
             </ion-item>
         </ion-list>
 

@@ -1,9 +1,9 @@
-angular.module('sociogram', ['ionic', 'openfb', 'sociogram.controllers'])
+angular.module('socialflashcards', ['ionic', 'openfb', 'socialflashcards.controllers', 'socialflashcards.services'])
 
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
 
-        //OpenFB.init('1528657274093741','http://localhost:8100/oauthcallback.html',$window.sessionStorage);
-        OpenFB.init('1528657274093741','https://www.facebook.com/connect/login_success.html',$window.sessionStorage);
+        OpenFB.init('1528657274093741','http://localhost:8100/oauthcallback.html',$window.sessionStorage);
+        //OpenFB.init('1528657274093741','https://www.facebook.com/connect/login_success.html',$window.sessionStorage);
 
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
