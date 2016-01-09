@@ -7,6 +7,8 @@ plugins/
 _replicator/
 _users/
 friends/
+pouch__all_dbs__/
+pouch__auth_sessions_/
 
 
 
