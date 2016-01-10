@@ -17,7 +17,7 @@ angular.module('socialflashcards.services', [])
       deleteFriend: deleteFriend,
       getAllDocs: getAllDocs,
       loadDB: loadDB,
-      getRandomFriend: getRandomFriend
+      getRandomFriends: getRandomFriends
     };
 
     function initDB() {
@@ -52,16 +52,20 @@ angular.module('socialflashcards.services', [])
 
     }
 
-    function getRandomFriend(){
-      return _db.allDocs().then(function (res) {
-        var ids = res.rows.map(function (row) { return row.id; });
-        var index = Math.floor(Math.random() * ids.length);
-        return _db.get(ids[index]);
-      }).then(function (randomDoc) {
-        // you got a randomDoc
-        console.log(randomDoc);
-      }).catch(console.log.bind(console))
-    }
+    function getRandomFriends(){
+       return  _db.allDocs().then(function (res) {
+         var friends = []
+          var ids = res.rows.map(function (row) { return row.id; });
+         for (var i = 0; i < 4; i++)  {
+          var index = Math.floor(Math.random() * ids.length);
+          friends.push(_db.get(ids[index]));
+        }
+          return  $q.all(friends);
+        })
+
+    };
+
+
 
     function addFriend(friend) {
       //return $q.when(_db.put(friend));

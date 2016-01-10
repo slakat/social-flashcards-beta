@@ -59,7 +59,7 @@ angular.module('socialflashcards.controllers', [])
         });
     })
 
-    .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB, $ionicPlatform, FriendsService) {
+    .controller('FriendsCtrl', function ($scope, $stateParams, OpenFB, $ionicPlatform, FriendsService, $q, $ionicModal) {
   /*      OpenFB.get('/' + $stateParams.personId + '/friends', {limit: 5})
             .success(function (result) {
                 $scope.friends = result.data;
@@ -68,17 +68,25 @@ angular.module('socialflashcards.controllers', [])
                 alert(data.error.message);
             });*/
       // Initialize the database.
+
       $ionicPlatform.ready(function() {
 
         FriendsService.loadDB();
 
-         FriendsService.getRandomFriend().then(function(result)
+         FriendsService.getRandomFriends().then(function(result)
         {
-          $scope.friends = result;
-          console.log($scope.friends);
+          var id = Math.floor(Math.random() * 4);
+          $scope.selected = result[id];
+          $q.when($scope.friends = result);
+
+
         });
 
       });
+
+
+
+
 
 
     })

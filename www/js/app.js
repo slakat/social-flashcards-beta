@@ -1,4 +1,4 @@
-angular.module('socialflashcards', ['ionic', 'openfb', 'socialflashcards.controllers', 'socialflashcards.services'])
+angular.module('socialflashcards', ['ionic', 'openfb','socialflashcards.controllers', 'socialflashcards.services'])
 
     .run(function ($rootScope, $state, $ionicPlatform, $window, OpenFB) {
 
