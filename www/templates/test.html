@@ -1,0 +1,33 @@
+<ion-view title="Test" hide-back-button="true">
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+
+    <ion-content has-header="true" padding="true">
+          <div class="card">
+            <div class="item item-divider">
+              Fullscreen images
+            </div>
+            <div class="item item-text-wrap">
+              <div class="button-bar">
+                <a class="button" ng-click="showImage(1)">Small</a>
+                <a class="button" ng-click="showImage(2)">Medium</a>
+                <a class="button" ng-click="showImage(3)">Very large</a>
+              </div>
+            </div>
+          </div>
+
+          <script id="image-modal.html" type="text/ng-template">
+            <div class="modal image-modal transparent" ng-click="closeModal()">
+              <ion-pane class="transparent">
+                <img ng-src="{{imageSrc}}" class="fullscreen-image"/>
+                <button class="button button-block assertive" ng-click="closeModal()">Close</button>
+              </ion-pane>
+            </div>
+          </script>
+
+
+    </ion-content>
+
+</ion-view>

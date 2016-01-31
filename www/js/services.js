@@ -22,13 +22,30 @@ angular.module('socialflashcards.services', [])
 
     function initDB() {
       // Creates the database or opens if it already exists
+      var prefix = '';
+      var database = 'friends2';
 
-      _db = new PouchDB('friends', {adapter: 'websql'});
+      var ua = navigator.userAgent;
+
+
+      if (ua.indexOf("Android") >= 0) {
+
+        var version = parseFloat(ua.slice(ua.indexOf("Android") + 8));
+
+        if (version <= 4.3) {
+          prefix = 'websql://';
+        }
+      }
+
+      var dbname = prefix + database;
+
+
+      _db = new PouchDB(dbname, {adapter: 'websql'});
       var reset = function() {
         _db.destroy().then(function() {
           console.log('ALL YOUR BASE ARE BELONG TO US');
-          _db = new PouchDB('friends');
-          PouchDB.replicate('friends', 'http://localhost:5984/friends', {live: true});
+          _db = new PouchDB(dbname);
+          PouchDB.replicate(dbname, 'http://localhost:5984/friends', {live: true});
 
         });
       };
@@ -37,7 +54,24 @@ angular.module('socialflashcards.services', [])
     };
 
     function loadDB(){
-      _db = new PouchDB('friends');
+      var prefix = '';
+      var database = 'friends2';
+
+      var ua = navigator.userAgent;
+
+      //alert(ua);
+      if (ua.indexOf("Android") >= 0) {
+
+        var version = parseFloat(ua.slice(ua.indexOf("Android") + 8));
+
+        if (version <= 4.3) {
+          prefix = 'websql://';
+        }
+      }
+
+      var dbname = prefix + database;
+      //alert(dbname);
+      _db = new PouchDB(dbname);
 
     };
 

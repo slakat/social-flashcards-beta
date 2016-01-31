@@ -1,4 +1,4 @@
-<ion-view title="Friends">
+<ion-view title="Who's that Friend?">
 
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
@@ -17,10 +17,32 @@
 
 
         <ion-list>
-            <button ng-click="" class="text-center button button-block button-positive"  ng-repeat="friend in friends">
+            <button ng-click="showImage(friend.name)" class="text-center button button-block button-positive"  ng-repeat="friend in friends">
                 {{friend.name}}
             </button>
         </ion-list>
+
+      <script id="game-modal.html" type="text/ng-template">
+        <div class="modal image-modal transparent" ng-click="closeModal()">
+          <ion-pane class="transparent">
+            <div class="list" >
+              <div style="margin: 0 auto; width:100px">
+
+
+                <img ng-src="{{imageSrc}}" >
+
+
+              </div>
+              <h1 class="text-center" ng-class="msgClass" >{{msg}}</h1>
+            </div>
+            <div class="row">
+              <div class="col-50"><button class="button button-block button-assertive" ng-click="closeModal()">Close</button></div>
+              <div class="col-50"><button class="button button-block button-calm" ng-click="gameNext()">Next</button></div>
+            </div>
+
+          </ion-pane>
+        </div>
+      </script>
 
     </ion-content>
 

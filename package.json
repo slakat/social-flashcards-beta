@@ -19,6 +19,7 @@
     "cordova-plugin-console"
   ],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ]
 }

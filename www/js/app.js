@@ -112,6 +112,15 @@ angular.module('socialflashcards', ['ionic', 'openfb','socialflashcards.controll
                     }
                 }
             })
+          .state('app.test-modal', {
+            url: "/test-modal",
+            views: {
+              'menuContent': {
+                templateUrl: "templates/test.html",
+                controller: "TestCtrl"
+              }
+            }
+          })
             .state('app.feed', {
                 url: "/person/:personId/feed",
                 views: {
